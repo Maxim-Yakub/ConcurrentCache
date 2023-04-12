@@ -1,7 +1,7 @@
 package org.example.abstracts;
 
 
-public interface Cash {
+public interface Cache {
 
     String addValue(String key, String value, long price);
 

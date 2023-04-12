@@ -1,26 +1,26 @@
 package org.example.threads;
 
 import org.apache.log4j.Logger;
-import org.example.abstracts.Cash;
+import org.example.abstracts.Cache;
 
 import java.util.Random;
 
-public class WriteCash implements Runnable {
+public class WriteCache implements Runnable {
 
-    private final Cash cash;
+    private final Cache cache;
 
     private final Logger log;
 
     private final int maxCashSize;
 
 
-    public WriteCash(Cash cash) {
+    public WriteCache(Cache cache) {
 
-        this.cash = cash;
+        this.cache = cache;
 
-        log = Logger.getLogger(WriteCash.class);
+        log = Logger.getLogger(WriteCache.class);
 
-        maxCashSize = cash.getSize() + 1;
+        maxCashSize = cache.getSize() + 1;
 
     }
 
@@ -39,15 +39,15 @@ public class WriteCash implements Runnable {
                 switch (opNumber) {
 
                     case 1:
-                        log.info("Добавление записи\n" + cash.addValue(key, "v1", 1000L));
+                        log.info("Добавление записи\n" + cache.addValue(key, "v1", 1000L));
                         break;
 
                     case 2:
-                        log.info("Добавление записи\n" + cash.addValue(key, "v2", 1111L));
+                        log.info("Добавление записи\n" + cache.addValue(key, "v2", 1111L));
                         break;
 
                     case 3:
-                        log.info("Удаление записи\n" + cash.deleteValue(key));
+                        log.info("Удаление записи\n" + cache.deleteValue(key));
                         break;
 
                 }

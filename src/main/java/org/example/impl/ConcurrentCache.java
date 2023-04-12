@@ -1,16 +1,18 @@
 package org.example.impl;
 
-import org.example.abstracts.Cash;
+import org.example.abstracts.Cache;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ConcurrentCash implements Cash {
+public class ConcurrentCache implements Cache {
 
     private final AtomicInteger size;
 
     private final Map<String, CashValue> cashTable;
+
+    private final String logValue;
 
     public static class CashValue {
         private final String value;
@@ -46,11 +48,14 @@ public class ConcurrentCash implements Cash {
         }
     }
 
-    public ConcurrentCash(int size) {
+    public ConcurrentCache(int size) {
 
         this.size = new AtomicInteger(size);
 
         cashTable = new ConcurrentHashMap<>();
+
+        logValue = "\n %s:\n\t value: %s \n\t price: %d \n\n Cache size: " + size + " / ";
+
     }
 
     public synchronized String addValue(String key, String value, long price) {
@@ -71,22 +76,17 @@ public class ConcurrentCash implements Cash {
             if (addedValue.get().equals(cashValue)) {
 
                 result = "Запись есть в кэше";
-            }
-            else {
+            } else {
 
                 cashTable.put(key, cashValue);
 
-                result = String.format("Обновлена запись:\n %s:\n\t value: %s \n\t price: %d \n", key, value, price);
+                result = String.format("Обновлена запись: " + logValue + "%d \n", key, value, price, getSize());
             }
         } else {
 
             cashTable.put(key, cashValue);
 
-
-
-            result = String.format("Добавлена запись:\n %s:\n\t value: %s \n\t price: %d \n", key, value, price);
-
-            size.decrementAndGet();
+            result = String.format("Добавлена запись: " + logValue + "%d \n", key, value, price, size.decrementAndGet());
         }
 
         return result;
@@ -94,18 +94,17 @@ public class ConcurrentCash implements Cash {
 
     public synchronized String deleteValue(String key) {
 
-        Optional<CashValue> removedValue = Optional.ofNullable(cashTable.get(key));
+        Optional<CashValue> optionalValue = Optional.ofNullable(cashTable.get(key));
 
-        if (removedValue.isPresent()) {
+        if (optionalValue.isPresent()) {
 
             cashTable.remove(key);
 
-            size.incrementAndGet();
-
-            return String.format("Удалена запись: \n %s:\n\t value: %s \n\t price: %d \n",
+            return String.format("Удалена запись: " + logValue + "%d \n",
                     key,
-                    removedValue.get().value,
-                    removedValue.get().price);
+                    optionalValue.get().value,
+                    optionalValue.get().price,
+                    size.incrementAndGet());
         }
 
         return "Значения для удаления не найдено";
@@ -120,17 +119,17 @@ public class ConcurrentCash implements Cash {
             return "Кэш пуст";
         }
 
-        for (Map.Entry<String, CashValue> pair : cashTable.entrySet()) {
+        cashTable.entrySet().forEach(pair -> result.append(
 
-            String temp = String.format("%s:\n\tvalue: %s\n\tprice: %d \n",
-                    pair.getKey(),
-                    pair.getValue().value,
-                    pair.getValue().price);
-
-            result.append(temp);
-        }
+                String.format(logValue + "%d \n",
+                        pair.getKey(),
+                        pair.getValue().value,
+                        pair.getValue().price,
+                        getSize())
+        ));
 
         return result.toString();
+
     }
 
     public int getSize() {

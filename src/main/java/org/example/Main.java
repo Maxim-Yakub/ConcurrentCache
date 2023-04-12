@@ -1,36 +1,34 @@
 package org.example;
 
-import org.example.abstracts.Cash;
-import org.example.abstracts.CashManager;
-import org.example.threads.ReadCash;
-import org.example.threads.WriteCash;
-import org.example.impl.ConcurrentCash;
-import org.example.impl.ConcurrentCashManager;
+import org.example.abstracts.Cache;
+import org.example.abstracts.CacheManager;
+import org.example.threads.ReadCache;
+import org.example.threads.WriteCache;
+import org.example.impl.ConcurrentCache;
+import org.example.impl.ConcurrentCacheManager;
 
 public class Main {
-    static int cashSize = 2;
-    static int countReaders = 1;
-    static int countWriters = 10;
+    static int cashSize = 5;
+    static int countReaders = 10;
+    static int countWriters = 1;
     static String terminateCommand = "kill";
 
 
     public static void main(String[] args) {
 
-        Cash cash = new ConcurrentCash(cashSize);
+        Cache cache = new ConcurrentCache(cashSize);
 
-        CashManager cashManager = new ConcurrentCashManager(
-                new ReadCash(cash),
-                new WriteCash(cash),
+        CacheManager cacheManager = new ConcurrentCacheManager(
+                new ReadCache(cache),
+                new WriteCache(cache),
                 countReaders,
                 countWriters);
 
-        cashManager.readCash();
+        cacheManager.readCash();
 
-        cashManager.writeCash();
+        cacheManager.writeCash();
 
-        Thread.getAllStackTraces().keySet().forEach(x-> System.out.println(x.getName()));
-
-        cashManager.terminateAll(terminateCommand);
+        cacheManager.terminateAll(terminateCommand);
 
     }
 }

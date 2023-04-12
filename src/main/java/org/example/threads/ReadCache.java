@@ -1,19 +1,19 @@
 package org.example.threads;
 
 import org.apache.log4j.Logger;
-import org.example.abstracts.Cash;
+import org.example.abstracts.Cache;
 
-public class ReadCash implements Runnable {
+public class ReadCache implements Runnable {
 
-    private final Cash cash;
+    private final Cache cache;
 
     private final Logger log;
 
-    public ReadCash(Cash cash) {
+    public ReadCache(Cache cache) {
 
-        this.cash = cash;
+        this.cache = cache;
 
-        log = Logger.getLogger(ReadCash.class);
+        log = Logger.getLogger(ReadCache.class);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ReadCash implements Runnable {
         try {
             while (!Thread.currentThread().isInterrupted()) {
 
-                log.info("Данные кэша\n" + cash.readValues());
+                log.info("Данные кэша\n" + cache.readValues());
 
                 Thread.sleep(1000);
 

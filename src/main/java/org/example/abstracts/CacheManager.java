@@ -1,6 +1,6 @@
 package org.example.abstracts;
 
-public interface CashManager {
+public interface CacheManager {
     void readCash();
 
     void writeCash();

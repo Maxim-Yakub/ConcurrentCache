@@ -1,22 +1,22 @@
 package org.example.impl;
 
-import org.example.abstracts.CashManager;
-import org.example.threads.ReadCash;
-import org.example.threads.WriteCash;
+import org.example.abstracts.CacheManager;
+import org.example.threads.ReadCache;
+import org.example.threads.WriteCache;
 
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class ConcurrentCashManager implements CashManager {
-    private final ReadCash reader;
+public class ConcurrentCacheManager implements CacheManager {
+    private final ReadCache reader;
 
-    private final WriteCash writer;
+    private final WriteCache writer;
 
     private final int countReaders;
 
     private final int countWriters;
 
-    public ConcurrentCashManager(ReadCash reader, WriteCash writer, int countReaders, int countWriters) {
+    public ConcurrentCacheManager(ReadCache reader, WriteCache writer, int countReaders, int countWriters) {
         this.reader = reader;
         this.writer = writer;
         this.countReaders = countReaders;
