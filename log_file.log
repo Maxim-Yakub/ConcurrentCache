@@ -1,0 +1,81 @@
+2023-04-12 16:44:54 INFO  org.example.threads.ReadCash {1}:24 Reader_0 - Данные кэша
+Кэш пуст
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:46 Writer_4 - Добавление записи
+Добавлена запись:
+ Key № 1:
+	 value: v2 
+	 price: 1111 
+
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:42 Writer_8 - Добавление записи
+Кэщ переполнен
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:50 Writer_5 - Удаление записи
+Удалена запись: 
+ Key № 1:
+	 value: v2 
+	 price: 1111 
+
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:42 Writer_7 - Добавление записи
+Кэщ переполнен
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:46 Writer_3 - Добавление записи
+Кэщ переполнен
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:42 Writer_9 - Добавление записи
+Добавлена запись:
+ Key № 2:
+	 value: v1 
+	 price: 1000 
+
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:46 Writer_2 - Добавление записи
+Добавлена запись:
+ Key № 2:
+	 value: v2 
+	 price: 1111 
+
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:46 Writer_1 - Добавление записи
+Запись есть в кэше
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:50 Writer_6 - Удаление записи
+Удалена запись: 
+ Key № 2:
+	 value: v1 
+	 price: 1000 
+
+2023-04-12 16:44:54 INFO  org.example.threads.WriteCash {1}:46 Writer_0 - Добавление записи
+Добавлена запись:
+ Key № 1:
+	 value: v2 
+	 price: 1111 
+
+2023-04-12 16:44:55 INFO  org.example.threads.ReadCash {1}:24 Reader_0 - Данные кэша
+Key № 1:
+	value: v2
+	price: 1111 
+Key № 2:
+	value: v2
+	price: 1111 
+
+2023-04-12 16:44:56 INFO  org.example.threads.ReadCash {1}:24 Reader_0 - Данные кэша
+Key № 1:
+	value: v2
+	price: 1111 
+Key № 2:
+	value: v2
+	price: 1111 
+
+2023-04-12 16:44:57 INFO  org.example.threads.ReadCash {1}:24 Reader_0 - Данные кэша
+Key № 1:
+	value: v2
+	price: 1111 
+Key № 2:
+	value: v2
+	price: 1111 
+
+2023-04-12 16:44:57 INFO  org.example.threads.ReadCash {1}:32 Reader_0 - Thread Reader_0 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_2 - Thread Writer_2 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_4 - Thread Writer_4 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_8 - Thread Writer_8 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_6 - Thread Writer_6 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_7 - Thread Writer_7 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_9 - Thread Writer_9 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_5 - Thread Writer_5 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_3 - Thread Writer_3 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_0 - Thread Writer_0 was finished
+2023-04-12 16:44:57 INFO  org.example.threads.WriteCash {1}:59 Writer_1 - Thread Writer_1 was finished
