@@ -11,8 +11,8 @@ public class Main {
     static int cashSize = 5;
     static int countReaders = 10;
     static int countWriters = 1;
-    static int readFrequency = 10000;
-    static int writeFrequency = 1000;
+    static int readFrequency = 1000;
+    static int writeFrequency = 5000;
     static String terminateCommand = "kill";
 
 
