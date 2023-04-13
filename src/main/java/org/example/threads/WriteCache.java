@@ -13,14 +13,18 @@ public class WriteCache implements Runnable {
 
     private final int maxCashSize;
 
+    private final int frequency;
 
-    public WriteCache(Cache cache) {
+
+    public WriteCache(Cache cache, int frequency) {
 
         this.cache = cache;
 
         log = Logger.getLogger(WriteCache.class);
 
         maxCashSize = cache.getSize() + 1;
+
+        this.frequency = frequency;
 
     }
 
@@ -30,9 +34,9 @@ public class WriteCache implements Runnable {
         try {
             while (!Thread.currentThread().isInterrupted()) {
 
-                int keyNumber = new Random().ints(1, (maxCashSize)).findFirst().getAsInt();
+                int keyNumber = new Random().ints(1, (maxCashSize)).findFirst().orElse(1);
 
-                int opNumber = new Random().ints(1, (4)).findFirst().getAsInt();
+                int opNumber = new Random().ints(1, (4)).findFirst().orElse(1);
 
                 String key = "Key № " + keyNumber;
 
@@ -52,7 +56,7 @@ public class WriteCache implements Runnable {
 
                 }
 
-                Thread.sleep(5000);
+                Thread.sleep(frequency);
             }
         } catch (InterruptedException e) {
 

@@ -12,7 +12,7 @@ public class ConcurrentCache implements Cache {
 
     private final Map<String, CashValue> cashTable;
 
-    private final String logValue;
+    private final String logFormat;
 
     public static class CashValue {
         private final String value;
@@ -54,7 +54,7 @@ public class ConcurrentCache implements Cache {
 
         cashTable = new ConcurrentHashMap<>();
 
-        logValue = "\n %s:\n\t value: %s \n\t price: %d \n\n Cache size: " + size + " / ";
+        logFormat = "\n %s:\n\t value: %s \n\t price: %d \n\n Cache size: " + size + " / %d \n";
 
     }
 
@@ -80,13 +80,13 @@ public class ConcurrentCache implements Cache {
 
                 cashTable.put(key, cashValue);
 
-                result = String.format("Обновлена запись: " + logValue + "%d \n", key, value, price, getSize());
+                result = String.format("Обновлена запись: " + logFormat, key, value, price, getSize());
             }
         } else {
 
             cashTable.put(key, cashValue);
 
-            result = String.format("Добавлена запись: " + logValue + "%d \n", key, value, price, size.decrementAndGet());
+            result = String.format("Добавлена запись: " + logFormat, key, value, price, size.decrementAndGet());
         }
 
         return result;
@@ -100,7 +100,7 @@ public class ConcurrentCache implements Cache {
 
             cashTable.remove(key);
 
-            return String.format("Удалена запись: " + logValue + "%d \n",
+            return String.format("Удалена запись: " + logFormat,
                     key,
                     optionalValue.get().value,
                     optionalValue.get().price,
@@ -119,12 +119,12 @@ public class ConcurrentCache implements Cache {
             return "Кэш пуст";
         }
 
-        cashTable.entrySet().forEach(pair -> result.append(
+        cashTable.forEach((key, value) -> result.append(
 
-                String.format(logValue + "%d \n",
-                        pair.getKey(),
-                        pair.getValue().value,
-                        pair.getValue().price,
+                String.format(logFormat,
+                        key,
+                        value.value,
+                        value.price,
                         getSize())
         ));
 

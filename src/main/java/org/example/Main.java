@@ -11,6 +11,8 @@ public class Main {
     static int cashSize = 5;
     static int countReaders = 10;
     static int countWriters = 1;
+    static int readFrequency = 10000;
+    static int writeFrequency = 1000;
     static String terminateCommand = "kill";
 
 
@@ -19,8 +21,8 @@ public class Main {
         Cache cache = new ConcurrentCache(cashSize);
 
         CacheManager cacheManager = new ConcurrentCacheManager(
-                new ReadCache(cache),
-                new WriteCache(cache),
+                new ReadCache(cache, readFrequency),
+                new WriteCache(cache, writeFrequency),
                 countReaders,
                 countWriters);
 

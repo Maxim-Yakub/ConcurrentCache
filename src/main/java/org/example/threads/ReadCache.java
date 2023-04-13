@@ -9,9 +9,13 @@ public class ReadCache implements Runnable {
 
     private final Logger log;
 
-    public ReadCache(Cache cache) {
+    private final int frequency;
+
+    public ReadCache(Cache cache, int frequency) {
 
         this.cache = cache;
+
+        this.frequency = frequency;
 
         log = Logger.getLogger(ReadCache.class);
     }
@@ -23,7 +27,7 @@ public class ReadCache implements Runnable {
 
                 log.info("Данные кэша\n" + cache.readValues());
 
-                Thread.sleep(1000);
+                Thread.sleep(frequency);
 
             }
 
